@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Small White Circle Cursor + Confetti</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    cursor: none; /* Hide native cursor */
+  }
+  body {
+    background-color: #1e1e2f;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Smaller white circle cursor */
+  #tiny-circle-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px 2px white;
+  }
+
+  /* Confetti pieces */
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    opacity: 1;
+    pointer-events: none;
+    border-radius: 2px;
+    animation: confetti-fall 1s forwards;
+    will-change: transform, opacity;
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--x), var(--y)) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Small White Circle Cursor + Confetti</h1>
+  <p>Click anywhere and watch the confetti burst near your mouse.</p>
+
+  <div id="tiny-circle-cursor"></div>
+
+<script>
+  const tinyCircle = document.getElementById('tiny-circle-cursor');
+
+  window.addEventListener('mousemove', e => {
+    tinyCircle.style.left = e.clientX + 'px';
+    tinyCircle.style.top = e.clientY + 'px';
+  });
+
+  // Confetti colors: dark blue, light blue, white, grey
+  const colors = ['#1e3a8a', '#60a5fa', '#ffffff', '#9ca3af'];
+
+  function createConfetti(x, y) {
+    const count = 15;
+    for (let i = 0; i < count; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.left = x + 'px';
+      confetti.style.top = y + 'px';
+
+      const xMove = (Math.random() - 0.5) * 150 + 'px';
+      const yMove = (Math.random() - 1) * 150 + 'px';
+
+      confetti.style.setProperty('--x', xMove);
+      confetti.style.setProperty('--y', yMove);
+
+      document.body.appendChild(confetti);
+
+      confetti.addEventListener('animationend', () => {
+        confetti.remove();
+      });
+    }
+  }
+
+  window.addEventListener('click', e => {
+    createConfetti(e.clientX, e.clientY);
+  });
+</script>
+</body>
+</html>
