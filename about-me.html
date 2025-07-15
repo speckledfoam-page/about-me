@@ -13,9 +13,9 @@
       color: #ffffff;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
-      padding: 50px;
+      padding: 5% 5% 50px 5%; /* use percentage padding for responsive sides */
       box-sizing: border-box;
-      overflow-x: hidden;
+      overflow-x: hidden; /* prevent horizontal scroll */
       position: relative;
     }
 
@@ -51,17 +51,22 @@
       position: relative;
       z-index: 10;
       max-width: 600px;
+      width: 100%;        /* make container responsive */
       margin: auto;
       background: #2e2e3e;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 10px #00000088;
+      box-sizing: border-box;  /* ensure padding inside width */
+      overflow-x: hidden;
     }
 
     img {
       width: 120px;
       border-radius: 50%;
       margin-bottom: 20px;
+      max-width: 100%; /* responsive */
+      height: auto;
     }
 
     h1 {
@@ -85,6 +90,9 @@
       margin: 5px;
       border-radius: 5px;
       font-size: 0.9em;
+      max-width: 100%;
+      box-sizing: border-box;
+      word-wrap: break-word;
     }
 
     .buttons {
@@ -92,6 +100,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 10px;
+      width: 100%;  /* make grid full container width */
+      box-sizing: border-box;
     }
 
     .btn {
@@ -102,6 +112,11 @@
       border-radius: 8px;
       font-size: 1em;
       transition: background 0.2s, transform 0.1s ease;
+      max-width: 100%;
+      box-sizing: border-box;
+      word-wrap: break-word;
+      white-space: normal; /* allow button text wrap */
+      cursor: none !important;
     }
 
     .btn:hover {
@@ -168,6 +183,9 @@
       align-items: center;
       gap: 10px;
       justify-content: center;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
 
     #volume-control label {
@@ -177,6 +195,7 @@
     #volume-control input[type="range"] {
       -webkit-appearance: none;
       width: 150px;
+      max-width: 100%;
       height: 8px;
       background: #444;
       border-radius: 12px;
